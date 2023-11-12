@@ -17,7 +17,7 @@ const DashboardPage = () => {
 
   const clickHandler = () => {
     data.initialCharge = data.initialCharge - data.ratePerClick;
-    console.log("iman", data.initialCharge);
+   
     setData({ ...data, initialCharge: data.initialCharge });
     console.log(data);
   };
@@ -126,7 +126,7 @@ useEffect(()=>{
         <>
           <h1>تعداد کاربران :</h1>
           <h2>{data?.usersCount}</h2>
-          <h1>تعداد تانکرها :</h1>
+          <h1>تعداد تبلیغات :</h1>
           <h2>{data?.trucksCount}</h2>
 
           {showImg && (

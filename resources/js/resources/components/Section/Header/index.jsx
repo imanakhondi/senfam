@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { User } from "../../../http/entities/User";
 import { userLogOut } from "../../../state/user/userAction";
 import Search from "../../../common/Input/Search";
+// import menuItems  from "../Sidebar";
+
 const Header = ({ customStyle = "" }) => {
     const [modal, setModal] = useState(false);
     const [menuMobile, setMenuMobile] = useState(false);
@@ -15,59 +17,24 @@ const Header = ({ customStyle = "" }) => {
     const userState = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const menuItems = [
         { title: `${sidebar.dashboard}`, icon: "category4", to: "dashboard" },
         {
-            title: `${sidebar.driversManagement}`,
+            title: `${sidebar.advertisingManagement}`,
             icon: "people4",
-            to: "drivers",
             submenu: [
                 {
-                    title: `${sidebar.drivers}`,
-                    to: "drivers",
+                    title: `${sidebar.advertising}`,
+                    to: "advertising",
                     icon: "people4",
                     style: "",
+                    end: "end",
                 },
                 {
-                    title: `${sidebar.addDriver}`,
-                    to: "driver/add",
+                    title: `${sidebar.addAdvertising}`,
+                    to: "advertising/add",
                     icon: "profile-add4",
-                    style: "",
-                },
-            ],
-        },
-        {
-            title: `${sidebar.carsManagement}`,
-            icon: "truck3",
-            submenu: [
-                {
-                    title: `${sidebar.cars}`,
-                    to: "cars",
-                    icon: "truck-fast3",
-                    style: "",
-                },
-                {
-                    title: `${sidebar.addCar}`,
-                    to: "car/add",
-                    icon: "truck-tick4",
-                    style: "",
-                },
-            ],
-        },
-        {
-            title: `${sidebar.tanksManagement}`,
-            icon: "colorfilter4",
-            submenu: [
-                {
-                    title: `${sidebar.tanks}`,
-                    to: "tanks",
-                    icon: "colorfilter4",
-                    style: "",
-                },
-                {
-                    title: `${sidebar.addTank}`,
-                    to: "tank/add",
-                    icon: "add-square",
                     style: "",
                 },
             ],
@@ -124,8 +91,6 @@ const Header = ({ customStyle = "" }) => {
                             positionStyle="!static"
                             customStyle="!top-0 bottom-0 right-0 mt-0 w-80 !shadow-none !bg-navBgColor !z-[999]"
                         >
-                            {/* <Siderbar customStyle="!block !z-[999]" /> */}
-
                             <div
                                 className={`${customStyle}  md:block w-60 min-h-min bg-navBgColor text-primaryColor my-3 mr-6 ml-2 py-5 pl-4`}
                             >
@@ -170,7 +135,8 @@ const Header = ({ customStyle = "" }) => {
                         <img src={profile} alt="" className="h-10 w-10 " />
                         <div className="hidden md:flex flex-col mr-2 text-xs font-bold text-primaryColorDark">
                             <h1>
-                                {userState?.user?.name} {userState?.user?.family}
+                                {userState?.user?.name}{" "}
+                                {userState?.user?.family}
                             </h1>
                             <span>{userState?.user?.username}</span>
                         </div>
@@ -212,26 +178,6 @@ export default Header;
 export const MenuItem = ({ item, index, id, setMenuMobile, menuMobile }) => {
     const [subMenu, setSubMenu] = useState(false);
     const [sub, setSub] = useState(false);
-    // const submenuHandler = (id) => {
-    //     const allUlSubmenu = document.querySelectorAll(".clickSlide ul");
-    //     const allclickSlide = document.querySelectorAll(".clickSlide");
-    //     const arrayUlSubmenu = [...allUlSubmenu];
-    //     arrayUlSubmenu.map((sub) => {
-    //         sub.style.display = "none";
-    //     });
-    //     const arrayClickSlide = [...allclickSlide];
-    //     const findClickSlide = arrayClickSlide.find((item) => item.id == id);
-    //     console.log("findClickSlide",findClickSlide);
-    //     arrayClickSlide.map((sub) => {
-    //         sub.setAttribute("aria-expanded", false);
-    //         findClickSlide.childNodes[1].style.height = 0;
-    //         findClickSlide.childNodes[1].style.overflow = "hidden";
-    //     });
-    //     findClickSlide.childNodes[1].style.display = "block";
-    //     findClickSlide.childNodes[1].style.background = "#00000006";
-    //     findClickSlide.childNodes[1].style.height = "auto";
-    //     findClickSlide.setAttribute("aria-expanded", true);
-    // };
     return (
         <>
             {item.submenu ? (
@@ -241,7 +187,6 @@ export const MenuItem = ({ item, index, id, setMenuMobile, menuMobile }) => {
                         role="link"
                         className="clickSlide"
                         id={id}
-                        // onClick={() => submenuHandler(id)}
                         onClick={() => {
                             setSubMenu(!subMenu);
                         }}
